@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  api:
+    depends_on:
+      - db
+    build: ../nestjs-crud-api
+    env_file: ./.env
+    ports:
+      - "3001:3001"
+    environment:
+      DB_HOST: 'db'
+      DB_USER: '${DB_USERNAME}'
+      DB_PASSWORD: '${DB_PASSWORD}'
+      DB_NAME: '${DB_DATABASE}'
+      DB_PORT: '3306'
+  db:
+    image: 'mysql'
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_HOST: "localhost"
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+    volumes:
+      - 'db:/var/lib/mysql'
+
+volumes:
+  db:
