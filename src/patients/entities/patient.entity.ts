@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "../../users/entities/user.entity";
 
 @Entity()
@@ -13,5 +13,6 @@ export class PatientEntity extends BaseEntity {
     @OneToOne(
         () => User, (user) => user.patient
     ) // specify inverse side as a second parameter
+    @JoinColumn()
     user: User
 }

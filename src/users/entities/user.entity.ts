@@ -10,40 +10,40 @@ import {
 import {PatientEntity} from "../../patients/entities/patient.entity";
 
 @Entity()
-export class User extends BaseEntity{
+export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ length: 25 })
-    first_name:string
+    @Column({length: 25})
+    first_name: string
 
-    @Column({ length: 25 })
-    last_name:string
+    @Column({length: 25})
+    last_name: string
 
     @Column('date')
-    birthdate:Date
+    birthdate: Date
 
     @Column()
-    role:string
+    role: string
 
     @Column()
-    gender:string
+    gender: string
 
     @Column()
-    address:string
+    address: string
 
     @Column()
-    photo:string;
+    photo: string;
 
     @Column()
-    phone:string
+    phone: string
 
-    @Column({ unique: true })
-    email:string
+    @Column({unique: true})
+    email: string
 
     @Column()
-    password
+    password: string
 
     @Column()
     @CreateDateColumn()
@@ -56,7 +56,6 @@ export class User extends BaseEntity{
     @OneToOne(
         () => PatientEntity, (patient) => patient.user
     ) // specify inverse side as a second parameter
-    @JoinColumn()
     patient: PatientEntity
 
 }
