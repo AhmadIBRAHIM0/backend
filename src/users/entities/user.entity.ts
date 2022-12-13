@@ -2,12 +2,12 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity, JoinColumn,
-    OneToOne,
+    Entity, OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
-import {PatientEntity} from "../../patients/entities/patient.entity";
+import {Patient} from "../../patients/entities/patient.entity";
+import {Doctor} from "../../doctors/entities/doctor.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -54,8 +54,13 @@ export class User extends BaseEntity {
     updatedAt: Date
 
     @OneToOne(
-        () => PatientEntity, (patient) => patient.user
+        () => Patient, (patient) => patient.user
     ) // specify inverse side as a second parameter
-    patient: PatientEntity
+    patient: Patient
+
+    @OneToOne(
+        () => Doctor, (doctor) => doctor.user
+    ) // specify inverse side as a second parameter
+    doctor: Doctor
 
 }
