@@ -22,5 +22,3 @@ import { ServicesModule } from './services/services.module';
   ],
 })
 export class AppModule {}
-
-// TODO - change relations "one to one"

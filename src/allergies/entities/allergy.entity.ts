@@ -2,9 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity,
-    OneToOne,
-    PrimaryGeneratedColumn,
+    Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Patient} from "../../patients/entities/patient.entity";
@@ -26,9 +24,8 @@ export class Allergy extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToOne(
-        () => Patient, (patient) => patient.allergy
-    ) // specify inverse side as a second parameter
-    patient: Patient
+    @ManyToMany(() => Patient, (patient) => patient.allergies)
+    @JoinTable()
+    patients: Patient[]
 
 }

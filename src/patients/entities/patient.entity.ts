@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinColumn, ManyToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "../../users/entities/user.entity";
 import {Allergy} from "../../allergies/entities/allergy.entity";
 import {Appointment} from "../../appointments/entities/appointment.entity";
@@ -18,11 +18,8 @@ export class Patient extends BaseEntity {
     @JoinColumn()
     user: User
 
-    @OneToOne(
-        () => Allergy, (allergy) => allergy.patient
-    ) // specify inverse side as a second parameter
-    @JoinColumn()
-    allergy: Allergy
+    @ManyToMany(() => Allergy, (allergy) => allergy.patients)
+    allergies: Allergy[]
 
     @OneToOne(
         () => Appointment, (appointment) => appointment.patient
