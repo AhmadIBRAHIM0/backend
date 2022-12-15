@@ -8,6 +8,7 @@ import { AllergiesModule } from './allergies/allergies.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { ServicesModule } from './services/services.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { ServicesModule } from './services/services.module';
       AllergiesModule,
       CategoriesModule,
       AppointmentsModule,
-      ServicesModule
+      ServicesModule,
+      AuthModule
   ],
 })
 export class AppModule {}
