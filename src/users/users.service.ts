@@ -36,11 +36,25 @@ export class UsersService {
         return user;
     }
 
-    update(id: number, updateUserDto: UpdateUserDto) {
-        return `This action updates a #${id} user`;
+    async update(id: number, updateUserDto: UpdateUserDto): Promise<User>  {
+
+        await this.userRepository.update(id, updateUserDto);
+
+        const user = await this.findOne(id)
+
+        if (!user) {
+            throw new NotFoundException(`User not found`);
+        }
+        return user;
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} user`;
+    async remove(id: number): Promise<void> {
+
+        const user = await this.findOne(id)
+
+        if (!user) {
+            throw new NotFoundException(`User not found`);
+        }
+        await this.userRepository.delete(id);
     }
 }
