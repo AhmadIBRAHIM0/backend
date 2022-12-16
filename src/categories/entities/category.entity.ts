@@ -2,8 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity,
-    OneToOne,
+    Entity, OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -26,9 +25,9 @@ export class Category extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToOne(
+    @OneToMany(
         () => Service, (service) => service.category
     ) // specify inverse side as a second parameter
-    service: Service
+    services: Service[]
 
 }
