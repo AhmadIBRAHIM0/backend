@@ -31,12 +31,12 @@ export class UsersService {
             },
         })
         if (!user) {
-            throw new NotFoundException(`User with not found`);
+            throw new NotFoundException(`User not found`);
         }
         return user;
     }
 
-    async update(id: number, updateUserDto: UpdateUserDto): Promise<User>  {
+    async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
 
         await this.userRepository.update(id, updateUserDto);
 

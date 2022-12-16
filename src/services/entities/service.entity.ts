@@ -2,7 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity, JoinColumn,
+    Entity, JoinColumn, ManyToOne,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
@@ -33,8 +33,8 @@ export class Service extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToOne(
-        () => Category, (category) => category.service
+    @ManyToOne(
+        () => Category, (category) => category.services
     ) // specify inverse side as a second parameter
     @JoinColumn()
     category: Category
