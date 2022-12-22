@@ -1,9 +1,10 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {Body, Injectable, NotFoundException} from '@nestjs/common';
 import {CreateServiceDto} from './dto/create-service.dto';
 import {UpdateServiceDto} from './dto/update-service.dto';
 import {ServiceRepository} from "./service.repository";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Service} from "./entities/service.entity";
+import {CategoryRepository} from "../categories/category.repository";
 
 @Injectable()
 export class ServicesService {
@@ -11,12 +12,25 @@ export class ServicesService {
     constructor(
         @InjectRepository(ServiceRepository)
         private serviceRepository: ServiceRepository,
+        @InjectRepository(CategoryRepository)
+        private readonly categoryRepository: CategoryRepository,
     ) {
     }
 
-    async create(createServiceDto: CreateServiceDto): Promise<Service> {
+    async create(@Body() createServiceDto: CreateServiceDto): Promise<Service> {
 
-        return await this.serviceRepository.save(createServiceDto);
+        const category = await this.categoryRepository.findOne({
+            where: {
+                id: createServiceDto.categoryId,
+            },
+        });
+        const product = this.serviceRepository.create({
+            ...createServiceDto,
+            category,
+        });
+        await this.serviceRepository.save(product);
+
+        return product;
 
     }
 
@@ -40,9 +54,15 @@ export class ServicesService {
 
     async update(id: number, updateServiceDto: UpdateServiceDto): Promise<Service> {
 
-        // TODO : update service
-        // await this.serviceRepository.update(id, updateServiceDto);
-        console.log(updateServiceDto['categoryId'])
+        const category = await this.categoryRepository.findOne({
+            where: {
+                id: updateServiceDto.categoryId,
+            },
+        });
+
+        await this.serviceRepository.update(id, {
+            ...updateServiceDto, category
+        });
 
         const service = this.findOne(id)
 

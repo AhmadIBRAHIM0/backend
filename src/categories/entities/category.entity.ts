@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import {Service} from "../../services/entities/service.entity";
 
-@Entity()
+@Entity('categories')
 export class Category extends BaseEntity {
 
     @PrimaryGeneratedColumn()

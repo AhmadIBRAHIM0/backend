@@ -3,7 +3,7 @@ import {User} from "../../users/entities/user.entity";
 import {Allergy} from "../../allergies/entities/allergy.entity";
 import {Appointment} from "../../appointments/entities/appointment.entity";
 
-@Entity()
+@Entity('patients')
 export class Patient extends BaseEntity {
 
     @PrimaryGeneratedColumn()

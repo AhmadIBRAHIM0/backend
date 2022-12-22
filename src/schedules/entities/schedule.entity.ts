@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import {Doctor} from "../../doctors/entities/doctor.entity";
 
-@Entity()
+@Entity('schedules')
 export class Schedule extends BaseEntity {
 
     @PrimaryGeneratedColumn()

@@ -12,7 +12,7 @@ import {Patient} from "../../patients/entities/patient.entity";
 import {Doctor} from "../../doctors/entities/doctor.entity";
 import {Service} from "../../services/entities/service.entity";
 
-@Entity()
+@Entity('appointments')
 export class Appointment extends BaseEntity {
 
     @PrimaryGeneratedColumn()

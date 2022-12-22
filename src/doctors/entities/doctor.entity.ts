@@ -5,7 +5,7 @@ import {Department} from "../../departments/entities/department.entity";
 import {Appointment} from "../../appointments/entities/appointment.entity";
 import {Schedule} from "../../schedules/entities/schedule.entity";
 
-@Entity()
+@Entity('doctors')
 export class Doctor extends BaseEntity {
 
     @PrimaryGeneratedColumn()

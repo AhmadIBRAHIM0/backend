@@ -10,7 +10,7 @@ import {
 import {Category} from "../../categories/entities/category.entity";
 import {Appointment} from "../../appointments/entities/appointment.entity";
 
-@Entity()
+@Entity('services')
 export class Service extends BaseEntity {
 
     @PrimaryGeneratedColumn()

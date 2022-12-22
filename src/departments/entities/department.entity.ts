@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import {Doctor} from "../../doctors/entities/doctor.entity";
 
-@Entity()
+@Entity('departments')
 export class Department extends BaseEntity {
 
     @PrimaryGeneratedColumn()

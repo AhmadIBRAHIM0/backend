@@ -1,7 +1,9 @@
 FROM node:latest
-WORKDIR usr/app
-COPY . .
+
+WORKDIR /app
+COPY package.json .
 RUN npm i -g npm@9.2.0
 RUN npm install
-RUN npm run build
-CMD ["npm", "run", "start:prod"]
+COPY . .
+
+CMD npm run start:dev
