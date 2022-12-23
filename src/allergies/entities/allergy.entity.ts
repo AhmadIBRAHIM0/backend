@@ -2,7 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn,
+    Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Patient} from "../../patients/entities/patient.entity";
@@ -24,8 +24,8 @@ export class Allergy extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @ManyToMany(() => Patient, (patient) => patient.allergies)
+    @ManyToOne(() => Patient, (patient) => patient.allergies)
     @JoinTable()
-    patients: Patient[]
+    patient: Patient
 
 }

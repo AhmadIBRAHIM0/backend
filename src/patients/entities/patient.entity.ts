@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, JoinColumn, ManyToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "../../users/entities/user.entity";
 import {Allergy} from "../../allergies/entities/allergy.entity";
 import {Appointment} from "../../appointments/entities/appointment.entity";
@@ -18,7 +18,7 @@ export class Patient extends BaseEntity {
     @JoinColumn()
     user: User
 
-    @ManyToMany(() => Allergy, (allergy) => allergy.patients)
+    @OneToMany(() => Allergy, (allergy) => allergy.patient)
     allergies: Allergy[]
 
     @OneToOne(
