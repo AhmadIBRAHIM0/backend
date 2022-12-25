@@ -1,4 +1,4 @@
-import {BaseEntity, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "../../users/entities/user.entity";
 import {Speciality} from "../../specialities/entities/speciality.entity";
 import {Department} from "../../departments/entities/department.entity";
@@ -12,13 +12,14 @@ export class Doctor extends BaseEntity {
     id: number;
 
     @OneToOne(
-        () => User, (user) => user.doctor
+        () => User, (user) => user.doctor,
+        { onDelete: 'CASCADE' }
     ) // specify inverse side as a second parameter
     @JoinColumn()
     user: User
 
-    @OneToOne(
-        () => Speciality, (speciality) => speciality.doctor
+    @ManyToOne(
+        () => Speciality, (speciality) => speciality.doctors
     ) // specify inverse side as a second parameter
     @JoinColumn()
     speciality: Speciality
@@ -30,11 +31,14 @@ export class Doctor extends BaseEntity {
     department: Department
 
     @OneToOne(
-        () => Appointment, (appointment) => appointment.doctor
+        () => Appointment, (appointment) => appointment.doctor,
+        { onDelete: 'CASCADE' }
     ) // specify inverse side as a second parameter
     appointment: Appointment
 
-    @OneToMany(() => Schedule, (schedule) => schedule.doctor)
+    @OneToMany(() => Schedule, (schedule) => schedule.doctor,
+        { onDelete: 'CASCADE' }
+        )
     schedules: Schedule[]
 
 }
