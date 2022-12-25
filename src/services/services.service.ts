@@ -24,13 +24,13 @@ export class ServicesService {
                 id: createServiceDto.categoryId,
             },
         });
-        const product = this.serviceRepository.create({
+        const service = this.serviceRepository.create({
             ...createServiceDto,
             category,
         });
-        await this.serviceRepository.save(product);
+        await this.serviceRepository.save(service);
 
-        return product;
+        return service;
 
     }
 
