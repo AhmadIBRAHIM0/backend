@@ -14,8 +14,6 @@ export class CreateUserDto {
     @IsDateString()
     birthdate: Date;
 
-    @IsNotEmpty()
-    @IsString()
     role: string;
 
     @IsNotEmpty()

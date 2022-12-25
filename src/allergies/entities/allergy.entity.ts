@@ -24,7 +24,8 @@ export class Allergy extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @ManyToOne(() => Patient, (patient) => patient.allergies)
+    @ManyToOne(() => Patient, (patient) => patient.allergies
+    )
     @JoinTable()
     patient: Patient
 

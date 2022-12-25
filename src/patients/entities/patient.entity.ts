@@ -13,16 +13,21 @@ export class Patient extends BaseEntity {
     blood_group: string;
 
     @OneToOne(
-        () => User, (user) => user.patient
+        () => User, (user) => user.patient,
+        { onDelete: 'CASCADE' }
     ) // specify inverse side as a second parameter
     @JoinColumn()
     user: User
 
-    @OneToMany(() => Allergy, (allergy) => allergy.patient)
+    @OneToMany(() => Allergy, (allergy) => allergy.patient,
+        { onDelete: 'CASCADE' }
+    )
+
     allergies: Allergy[]
 
     @OneToOne(
-        () => Appointment, (appointment) => appointment.patient
+        () => Appointment, (appointment) => appointment.patient,
+        {onDelete: 'CASCADE'}
     ) // specify inverse side as a second parameter
     appointment: Appointment
 
