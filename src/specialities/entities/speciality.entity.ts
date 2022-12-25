@@ -2,8 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity,
-    OneToOne,
+    Entity, OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -26,9 +25,9 @@ export class Speciality extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToOne(
+    @OneToMany(
         () => Doctor, (doctor) => doctor.speciality
     ) // specify inverse side as a second parameter
-    doctor: Doctor
+    doctors: Doctor[]
 
 }
