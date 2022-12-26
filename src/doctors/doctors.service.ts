@@ -9,6 +9,7 @@ import {Doctor} from "./entities/doctor.entity";
 import {SpecialityRepository} from "../specialities/speciality.repository";
 import {DepartmentRepository} from "../departments/department.repository";
 import {ScheduleRepository} from "../schedules/schedule.repository";
+import {Schedule} from "../schedules/entities/schedule.entity";
 
 @Injectable()
 export class DoctorsService {
@@ -46,7 +47,7 @@ export class DoctorsService {
             end: schedule.end,
             day: schedule.day,
         })))
-        console.log(schedules)
+
         doctor.schedules = await this.scheduleRepository.save(schedules)
 
         doctor.user = await this.userRepository.save(createDoctorDto)
@@ -85,7 +86,7 @@ export class DoctorsService {
 
         updateDoctorDto.role = Role.DOCTOR
 
-        const {specialityId, departmentId, ...updateUserDto} = updateDoctorDto;
+        const {specialityId, departmentId, schedules, ...updateUserDto} = updateDoctorDto;
         const doctor = await this.findOne(id)
         await this.userRepository.update(doctor.user.id, updateUserDto)
         await this.doctorRepository.update(doctor.id, {
@@ -101,6 +102,25 @@ export class DoctorsService {
                 }
             })
         })
+        await this.scheduleRepository.remove(doctor.schedules);
+
+        const schedulesObject = schedules.map(schedule => {
+            const scheduleObject = new Schedule()
+            scheduleObject.start = schedule.start
+            scheduleObject.end = schedule.end
+            scheduleObject.day = schedule.day
+            return scheduleObject
+        })
+
+        // Set the schedules for the doctor
+        doctor.schedules = schedulesObject;
+
+        // Save the schedules
+        await this.scheduleRepository.save(schedulesObject);
+
+        // Save the updated doctor
+        await this.doctorRepository.save(doctor);
+
 
         return await this.findOne(id)
 
@@ -110,6 +130,7 @@ export class DoctorsService {
 
         const doctor = await this.findOne(id)
         await this.userRepository.delete(doctor.user.id)
+        await this.scheduleRepository.remove(doctor.schedules)
         await this.doctorRepository.delete(id)
     }
 }
