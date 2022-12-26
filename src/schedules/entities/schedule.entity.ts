@@ -18,10 +18,10 @@ export class Schedule extends BaseEntity {
     day: string
 
     @Column()
-    start: Date
+    start: string
 
     @Column()
-    end: Date
+    end: string
 
     @Column()
     @CreateDateColumn()

@@ -8,6 +8,7 @@ import {Role} from "../users/user-role.enum";
 import {Doctor} from "./entities/doctor.entity";
 import {SpecialityRepository} from "../specialities/speciality.repository";
 import {DepartmentRepository} from "../departments/department.repository";
+import {ScheduleRepository} from "../schedules/schedule.repository";
 
 @Injectable()
 export class DoctorsService {
@@ -21,16 +22,15 @@ export class DoctorsService {
         private readonly specialityRepository: SpecialityRepository,
         @InjectRepository(DepartmentRepository)
         private readonly departmentRepository: DepartmentRepository,
+        @InjectRepository(ScheduleRepository)
+        private readonly scheduleRepository: ScheduleRepository,
     ) {
     }
 
     async create(createDoctorDto: CreateDoctorDto): Promise<Doctor> {
-        console.log(createDoctorDto);
 
         createDoctorDto.role = Role.DOCTOR
-        const user = await this.userRepository.save(createDoctorDto);
         const doctor = new Doctor()
-        doctor.user = user
         doctor.speciality = await this.specialityRepository.findOne({
             where: {
                 id: createDoctorDto.specialityId,
@@ -41,6 +41,16 @@ export class DoctorsService {
                 id: createDoctorDto.departmentId,
             }
         })
+        const schedules = this.scheduleRepository.create(createDoctorDto.schedules.map(schedule => ({
+            start: schedule.start,
+            end: schedule.end,
+            day: schedule.day,
+        })))
+        console.log(schedules)
+        doctor.schedules = await this.scheduleRepository.save(schedules)
+
+        doctor.user = await this.userRepository.save(createDoctorDto)
+
         return await this.doctorRepository.save(doctor)
     }
 
@@ -51,6 +61,7 @@ export class DoctorsService {
                 user: true,
                 speciality: true,
                 department: true,
+                schedules: true,
             }
         })
     }
@@ -65,6 +76,7 @@ export class DoctorsService {
                 user: true,
                 speciality: true,
                 department: true,
+                schedules: true,
             }
         })
     }
