@@ -10,6 +10,8 @@ import {SpecialityRepository} from "../specialities/speciality.repository";
 import {DepartmentRepository} from "../departments/department.repository";
 import {ScheduleRepository} from "../schedules/schedule.repository";
 import {Schedule} from "../schedules/entities/schedule.entity";
+import {AppointmentRepository} from "../appointments/appointment.repository";
+import {Appointment} from "../appointments/entities/appointment.entity";
 
 @Injectable()
 export class DoctorsService {
@@ -25,6 +27,8 @@ export class DoctorsService {
         private readonly departmentRepository: DepartmentRepository,
         @InjectRepository(ScheduleRepository)
         private readonly scheduleRepository: ScheduleRepository,
+        @InjectRepository(AppointmentRepository)
+        private readonly appointmentRepository: AppointmentRepository,
     ) {
     }
 
@@ -52,6 +56,8 @@ export class DoctorsService {
 
         doctor.user = await this.userRepository.save(createDoctorDto)
 
+        this.doctorRepository.create(doctor);
+
         return await this.doctorRepository.save(doctor)
     }
 
@@ -59,10 +65,12 @@ export class DoctorsService {
 
         return await this.doctorRepository.find({
             relations: {
+
                 user: true,
                 speciality: true,
                 department: true,
                 schedules: true,
+                appointments: true,
             }
         })
     }
@@ -78,8 +86,21 @@ export class DoctorsService {
                 speciality: true,
                 department: true,
                 schedules: true,
+                appointments: true,
             }
         })
+    }
+
+    async findAppointments(id: number): Promise<Appointment[]> {
+
+        return await this.appointmentRepository.find({
+            where: {
+                doctor: {
+                    id: id
+                }
+            },
+            relations: ['patient']
+        });
     }
 
     async update(id: number, updateDoctorDto: UpdateDoctorDto): Promise<Doctor> {

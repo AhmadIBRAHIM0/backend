@@ -24,17 +24,17 @@ export class Doctor extends BaseEntity {
     @JoinColumn()
     speciality: Speciality
 
-    @OneToOne(
-        () => Department, (department) => department.doctor
+    @ManyToOne(
+        () => Department, (department) => department.doctors
     ) // specify inverse side as a second parameter
     @JoinColumn()
     department: Department
 
-    @OneToOne(
+    @OneToMany(
         () => Appointment, (appointment) => appointment.doctor,
         { onDelete: 'CASCADE' }
     ) // specify inverse side as a second parameter
-    appointment: Appointment
+    appointments: Appointment[]
 
     @OneToMany(() => Schedule, (schedule) => schedule.doctor,
         { onDelete: 'CASCADE' }

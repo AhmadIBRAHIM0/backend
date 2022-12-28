@@ -6,6 +6,7 @@ import {DoctorRepository} from "./doctor.repository";
 import {SpecialityRepository} from "../specialities/speciality.repository";
 import {DepartmentRepository} from "../departments/department.repository";
 import {ScheduleRepository} from "../schedules/schedule.repository";
+import {AppointmentRepository} from "../appointments/appointment.repository";
 
 @Module({
     controllers: [DoctorsController],
@@ -15,7 +16,8 @@ import {ScheduleRepository} from "../schedules/schedule.repository";
         DoctorRepository,
         SpecialityRepository,
         DepartmentRepository,
-        ScheduleRepository
+        ScheduleRepository,
+        AppointmentRepository
     ],
 })
 export class DoctorsModule {
