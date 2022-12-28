@@ -4,7 +4,7 @@ import {
     CreateDateColumn,
     Entity,
     Generated,
-    JoinColumn,
+    JoinColumn, ManyToOne,
     OneToOne,
     PrimaryGeneratedColumn, UpdateDateColumn
 } from "typeorm";
@@ -18,6 +18,7 @@ export class Appointment extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column()
     @Generated('uuid')
     code: string;
 
@@ -31,7 +32,7 @@ export class Appointment extends BaseEntity {
     date: Date
 
     @Column()
-    time: Date
+    time: string
 
     @Column()
     @CreateDateColumn()
@@ -47,14 +48,14 @@ export class Appointment extends BaseEntity {
     @JoinColumn()
     patient: Patient
 
-    @OneToOne(
-        () => Doctor, (doctor) => doctor.appointment
+    @ManyToOne(
+        () => Doctor, (doctor) => doctor.appointments
     ) // specify inverse side as a second parameter
     @JoinColumn()
     doctor: Doctor
 
-    @OneToOne(
-        () => Service, (service) => service.appointment
+    @ManyToOne(
+        () => Service, (service) => service.appointments
     ) // specify inverse side as a second parameter
     @JoinColumn()
     service: Service

@@ -1,26 +1,84 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAppointmentDto } from './dto/create-appointment.dto';
-import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+import {Injectable} from '@nestjs/common';
+import {CreateAppointmentDto} from './dto/create-appointment.dto';
+import {InjectRepository} from "@nestjs/typeorm";
+import {Appointment} from "./entities/appointment.entity";
+import {AppointmentRepository} from "./appointment.repository";
+import {PatientRepository} from "../patients/patient.repository";
+import {DoctorRepository} from "../doctors/doctor.repository";
+import {ServiceRepository} from "../services/service.repository";
+import * as uuid from 'uuid';
 
 @Injectable()
 export class AppointmentsService {
-  create(createAppointmentDto: CreateAppointmentDto) {
-    return 'This action adds a new appointment';
-  }
 
-  findAll() {
-    return `This action returns all appointments`;
-  }
+    constructor(
+        @InjectRepository(AppointmentRepository)
+        private readonly appointmentRepository: AppointmentRepository,
+        @InjectRepository(PatientRepository)
+        private readonly patientRepository: PatientRepository,
+        @InjectRepository(DoctorRepository)
+        private readonly doctorRepository: DoctorRepository,
+        @InjectRepository(ServiceRepository)
+        private readonly serviceRepository: ServiceRepository,
+    ) {
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} appointment`;
-  }
+    async create(createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
 
-  update(id: number, updateAppointmentDto: UpdateAppointmentDto) {
-    return `This action updates a #${id} appointment`;
-  }
+        createAppointmentDto.code = uuid.v1()
 
-  remove(id: number) {
-    return `This action removes a #${id} appointment`;
-  }
+        const patient = await this.patientRepository.findOne({
+            where: {
+                id: createAppointmentDto.patientId,
+            }
+        });
+        const doctor = await this.doctorRepository.findOne({
+            where: {
+                id: createAppointmentDto.doctorId,
+            }
+        });
+        const service = await this.serviceRepository.findOne({
+            where: {
+                id: createAppointmentDto.serviceId,
+            }
+        });
+
+        const appointment = this.appointmentRepository.create({
+            ...createAppointmentDto,
+            patient,
+            doctor,
+            service,
+        })
+
+        return this.appointmentRepository.save(appointment);
+    }
+
+    async findAll(): Promise<Appointment[]> {
+        return await this.appointmentRepository.find({
+            relations: ['patient', 'doctor', 'service']
+        });
+    }
+
+    async findOne(id: number): Promise<Appointment> {
+
+        try {
+            return await this.appointmentRepository.findOneOrFail({
+                where: {
+                    id: id,
+                },
+                relations: ['patient', 'doctor', 'service']
+            });
+        } catch (e) {
+            throw e
+        }
+
+    }
+
+    async remove(id: number): Promise<void> {
+        try {
+            await this.appointmentRepository.delete(id);
+        } catch (e) {
+            throw e
+        }
+    }
 }
