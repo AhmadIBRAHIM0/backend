@@ -2,8 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity, JoinColumn, ManyToOne,
-    OneToOne,
+    Entity, JoinColumn, ManyToOne, OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -39,9 +38,9 @@ export class Service extends BaseEntity {
     @JoinColumn()
     category: Category
 
-    @OneToOne(
+    @OneToMany(
         () => Appointment, (appointment) => appointment.service
     ) // specify inverse side as a second parameter
-    appointment: Appointment
+    appointments: Appointment[]
 
 }
