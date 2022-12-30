@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {Body, Injectable, NotFoundException, ValidationPipe} from '@nestjs/common';
 import {CreateDepartmentDto} from './dto/create-department.dto';
 import {UpdateDepartmentDto} from './dto/update-department.dto';
 import {Department} from "./entities/department.entity";
@@ -12,7 +12,7 @@ export class DepartmentsService {
     ) {
     }
 
-    async create(createDepartmentDto: CreateDepartmentDto): Promise<Department> {
+    async create(@Body(ValidationPipe) createDepartmentDto: CreateDepartmentDto): Promise<Department> {
 
         try {
             return await this.departmentRepository.save(createDepartmentDto);
@@ -40,7 +40,7 @@ export class DepartmentsService {
         return department;
     }
 
-    async update(id: number, updateDepartmentDto: UpdateDepartmentDto): Promise<Department> {
+    async update(@Body(ValidationPipe) id: number, updateDepartmentDto: UpdateDepartmentDto): Promise<Department> {
 
         const result = await this.departmentRepository.update(id, updateDepartmentDto);
 

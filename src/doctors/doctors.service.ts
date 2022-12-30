@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Body, Injectable, ValidationPipe} from '@nestjs/common';
 import {CreateDoctorDto} from './dto/create-doctor.dto';
 import {UpdateDoctorDto} from './dto/update-doctor.dto';
 import {InjectRepository} from "@nestjs/typeorm";
@@ -12,6 +12,7 @@ import {ScheduleRepository} from "../schedules/schedule.repository";
 import {Schedule} from "../schedules/entities/schedule.entity";
 import {AppointmentRepository} from "../appointments/appointment.repository";
 import {Appointment} from "../appointments/entities/appointment.entity";
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class DoctorsService {
@@ -32,7 +33,7 @@ export class DoctorsService {
     ) {
     }
 
-    async create(createDoctorDto: CreateDoctorDto): Promise<Doctor> {
+    async create(@Body(ValidationPipe) createDoctorDto: CreateDoctorDto): Promise<Doctor> {
 
         createDoctorDto.role = Role.DOCTOR
         const doctor = new Doctor()
@@ -53,6 +54,9 @@ export class DoctorsService {
         })))
 
         doctor.schedules = await this.scheduleRepository.save(schedules)
+
+        const salt = await bcrypt.genSalt();
+        createDoctorDto.password = await this.userRepository.hashPassword(createDoctorDto.password, salt);
 
         doctor.user = await this.userRepository.save(createDoctorDto)
 
@@ -103,7 +107,7 @@ export class DoctorsService {
         });
     }
 
-    async update(id: number, updateDoctorDto: UpdateDoctorDto): Promise<Doctor> {
+    async update(@Body(ValidationPipe) id: number, updateDoctorDto: UpdateDoctorDto): Promise<Doctor> {
 
         updateDoctorDto.role = Role.DOCTOR
 

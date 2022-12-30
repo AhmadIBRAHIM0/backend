@@ -1,10 +1,11 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {Body, Injectable, NotFoundException, ValidationPipe} from '@nestjs/common';
 import {CreateUserDto} from './dto/create-user.dto';
 import {UpdateUserDto} from './dto/update-user.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {UserRepository} from "./user.repository";
 import {User} from "./entities/user.entity";
 import {Role} from "./user-role.enum";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -15,9 +16,12 @@ export class UsersService {
     ) {
     }
 
-    async create(createUserDto: CreateUserDto): Promise<User> {
+    async create(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<User> {
 
         createUserDto.role = Role.ADMIN
+        const salt = await bcrypt.genSalt();
+        console.log(this.userRepository.hashPassword(createUserDto.password, salt))
+        createUserDto.password = await this.userRepository.hashPassword(createUserDto.password, salt);
         return await this.userRepository.save(createUserDto);
     }
 
@@ -38,7 +42,7 @@ export class UsersService {
         return user;
     }
 
-    async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+    async update(@Body(ValidationPipe) id: number, updateUserDto: UpdateUserDto): Promise<User> {
 
         updateUserDto.role = Role.ADMIN
         await this.userRepository.update(id, updateUserDto);

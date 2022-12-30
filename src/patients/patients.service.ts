@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {Body, Injectable, NotFoundException, ValidationPipe} from '@nestjs/common';
 import {CreatePatientDto} from './dto/create-patient.dto';
 import {UpdatePatientDto} from './dto/update-patient.dto';
 import {InjectRepository} from "@nestjs/typeorm";
@@ -8,6 +8,7 @@ import {Patient} from "./entities/patient.entity";
 import {AllergyRepository} from "../allergies/allergy.repository";
 import {Role} from "../users/user-role.enum";
 import {Allergy} from "../allergies/entities/allergy.entity";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class PatientsService {
@@ -20,10 +21,12 @@ export class PatientsService {
     ) {
     }
 
-    async create(createPatientDto: CreatePatientDto): Promise<Patient> {
+    async create(@Body(ValidationPipe) createPatientDto: CreatePatientDto): Promise<Patient> {
 
         // create the user
         createPatientDto.role = Role.PATIENT;
+        const salt = await bcrypt.genSalt();
+        createPatientDto.password = await this.userRepository.hashPassword(createPatientDto.password, salt);
         const user = await this.userRepository.save(createPatientDto);
 
         // create the patient
@@ -69,7 +72,7 @@ export class PatientsService {
         return patient;
     }
 
-    async update(id: number, updatePatientDto: UpdatePatientDto): Promise<Patient> {
+    async update(@Body(ValidationPipe) id: number, updatePatientDto: UpdatePatientDto): Promise<Patient> {
 
         updatePatientDto.role = Role.PATIENT
 

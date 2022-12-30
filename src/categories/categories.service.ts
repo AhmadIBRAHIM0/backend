@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {Body, Injectable, NotFoundException, ValidationPipe} from '@nestjs/common';
 import {CreateCategoryDto} from './dto/create-category.dto';
 import {UpdateCategoryDto} from './dto/update-category.dto';
 import {InjectRepository} from "@nestjs/typeorm";
@@ -14,7 +14,7 @@ export class CategoriesService {
     ) {
     }
 
-    async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
+    async create(@Body(ValidationPipe) createCategoryDto: CreateCategoryDto): Promise<Category> {
 
         return await this.categoryRepository.save(createCategoryDto);
     }
@@ -37,7 +37,7 @@ export class CategoriesService {
         return category;
     }
 
-    async update(id: number, updateCategoryDto: UpdateCategoryDto): Promise<Category> {
+    async update(@Body(ValidationPipe) id: number, updateCategoryDto: UpdateCategoryDto): Promise<Category> {
 
         await this.categoryRepository.update(id, updateCategoryDto);
 

@@ -1,4 +1,4 @@
-import {Body, Injectable, NotFoundException} from '@nestjs/common';
+import {Body, Injectable, NotFoundException, ValidationPipe} from '@nestjs/common';
 import {CreateServiceDto} from './dto/create-service.dto';
 import {UpdateServiceDto} from './dto/update-service.dto';
 import {ServiceRepository} from "./service.repository";
@@ -17,7 +17,7 @@ export class ServicesService {
     ) {
     }
 
-    async create(@Body() createServiceDto: CreateServiceDto): Promise<Service> {
+    async create(@Body(ValidationPipe) createServiceDto: CreateServiceDto): Promise<Service> {
 
         const category = await this.categoryRepository.findOne({
             where: {
@@ -52,7 +52,7 @@ export class ServicesService {
         return service;
     }
 
-    async update(id: number, updateServiceDto: UpdateServiceDto): Promise<Service> {
+    async update(@Body(ValidationPipe) id: number, updateServiceDto: UpdateServiceDto): Promise<Service> {
 
         const category = await this.categoryRepository.findOne({
             where: {

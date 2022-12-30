@@ -1,4 +1,4 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {Body, Injectable, NotFoundException, ValidationPipe} from '@nestjs/common';
 import {CreateSpecialityDto} from './dto/create-speciality.dto';
 import {UpdateSpecialityDto} from './dto/update-speciality.dto';
 import {SpecialityRepository} from "./speciality.repository";
@@ -14,7 +14,7 @@ export class SpecialitiesService {
     ) {
     }
 
-    async create(createSpecialityDto: CreateSpecialityDto): Promise<Speciality> {
+    async create(@Body(ValidationPipe) createSpecialityDto: CreateSpecialityDto): Promise<Speciality> {
 
         return await this.specialityRepository.save(createSpecialityDto);
     }
@@ -37,7 +37,7 @@ export class SpecialitiesService {
         return speciality;
     }
 
-    async update(id: number, updateSpecialityDto: UpdateSpecialityDto): Promise<Speciality> {
+    async update(@Body(ValidationPipe) id: number, updateSpecialityDto: UpdateSpecialityDto): Promise<Speciality> {
 
         await this.specialityRepository.update(id, updateSpecialityDto);
 

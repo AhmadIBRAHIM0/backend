@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Body, Injectable, ValidationPipe} from '@nestjs/common';
 import {CreateAppointmentDto} from './dto/create-appointment.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Appointment} from "./entities/appointment.entity";
@@ -23,7 +23,7 @@ export class AppointmentsService {
     ) {
     }
 
-    async create(createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
+    async create(@Body(ValidationPipe) createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
 
         createAppointmentDto.code = uuid.v1()
 
