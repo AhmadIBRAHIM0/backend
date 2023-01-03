@@ -1,4 +1,4 @@
-import {Body, Injectable, ValidationPipe} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {CreateAppointmentDto} from './dto/create-appointment.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Appointment} from "./entities/appointment.entity";
@@ -7,6 +7,7 @@ import {PatientRepository} from "../patients/patient.repository";
 import {DoctorRepository} from "../doctors/doctor.repository";
 import {ServiceRepository} from "../services/service.repository";
 import * as uuid from 'uuid';
+import {User} from "../users/entities/user.entity";
 
 @Injectable()
 export class AppointmentsService {
@@ -23,15 +24,10 @@ export class AppointmentsService {
     ) {
     }
 
-    async create(@Body(ValidationPipe) createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
+    async create(createAppointmentDto: CreateAppointmentDto, user: User): Promise<Appointment> {
 
         createAppointmentDto.code = uuid.v1()
-
-        const patient = await this.patientRepository.findOne({
-            where: {
-                id: createAppointmentDto.patientId,
-            }
-        });
+        const patient = user.patient;
         const doctor = await this.doctorRepository.findOne({
             where: {
                 id: createAppointmentDto.doctorId,
@@ -42,7 +38,6 @@ export class AppointmentsService {
                 id: createAppointmentDto.serviceId,
             }
         });
-
         const appointment = this.appointmentRepository.create({
             ...createAppointmentDto,
             patient,

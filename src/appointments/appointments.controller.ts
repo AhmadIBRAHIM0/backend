@@ -1,14 +1,22 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, UseGuards, UsePipes, ValidationPipe} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AppointmentsService } from './appointments.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
+import {GetUser} from "../auth/get-user.decorator";
+import {User} from "../users/entities/user.entity";
 
 @Controller('appointments')
+@UseGuards(AuthGuard())
 export class AppointmentsController {
   constructor(private readonly appointmentsService: AppointmentsService) {}
 
   @Post()
-  create(@Body() createAppointmentDto: CreateAppointmentDto) {
-    return this.appointmentsService.create(createAppointmentDto);
+  @UsePipes(ValidationPipe)
+  create(
+      @Body() createAppointmentDto: CreateAppointmentDto,
+      @GetUser() user: User
+  ) {
+    return this.appointmentsService.create(createAppointmentDto, user);
   }
 
   @Get()

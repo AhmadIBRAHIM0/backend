@@ -5,18 +5,18 @@ import {PatientsService} from "../patients/patients.service";
 import {PatientRepository} from "../patients/patient.repository";
 import {UserRepository} from "../users/user.repository";
 import {AllergyRepository} from "../allergies/allergy.repository";
-import {UsersModule} from "../users/users.module";
 import {PassportModule} from "@nestjs/passport";
 import {JwtModule} from "@nestjs/jwt";
 import {JwtStrategy} from "./jwt.strategy";
 
 @Module({
     imports: [
-        UsersModule,
         PassportModule.register({defaultStrategy: 'jwt'}),
         JwtModule.register({
             secret: 'mySecretSecret',
-            signOptions: {expiresIn: '3600'},
+            signOptions: {
+                expiresIn: 3600
+            },
         }),
     ],
     controllers: [AuthController],
