@@ -1,4 +1,5 @@
 import {IsDateString, IsNotEmpty, IsString, Matches} from "class-validator";
+import {Role} from "../user-role.enum";
 
 export class CreateUserDto {
 
@@ -14,7 +15,7 @@ export class CreateUserDto {
     @IsDateString()
     birthdate: Date;
 
-    role: string;
+    role: Role;
 
     @IsNotEmpty()
     @IsString()

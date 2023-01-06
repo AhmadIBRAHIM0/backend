@@ -12,6 +12,10 @@ import { AuthModule } from './auth/auth.module';
 import { PatientsModule } from './patients/patients.module';
 import { DoctorsModule } from './doctors/doctors.module';
 import { SchedulesModule } from './schedules/schedules.module';
+import {UsersSeedService} from "./users/users-seed.service";
+import {UserRepository} from "./users/user.repository";
+import {APP_GUARD} from "@nestjs/core";
+import {RolesGuard} from "./guards/roles.guard";
 
 @Module({
   imports: [
@@ -26,7 +30,15 @@ import { SchedulesModule } from './schedules/schedules.module';
       AuthModule,
       PatientsModule,
       DoctorsModule,
-      SchedulesModule
+      SchedulesModule,
   ],
+    providers: [
+        UsersSeedService,
+        UserRepository,
+        {
+            provide: APP_GUARD,
+            useClass: RolesGuard,
+        }
+    ],
 })
 export class AppModule {}

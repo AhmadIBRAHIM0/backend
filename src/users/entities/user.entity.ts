@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import {Patient} from "../../patients/entities/patient.entity";
 import {Doctor} from "../../doctors/entities/doctor.entity";
+import {Role} from "../user-role.enum";
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -21,22 +22,35 @@ export class User extends BaseEntity {
     @Column({length: 25})
     last_name: string
 
-    @Column('date')
+    @Column({
+        nullable: true,
+    })
     birthdate: Date
 
-    @Column()
-    role: string
+    @Column({
+        type: 'enum',
+        enum: Role,
+    })
+    public role: Role
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     gender: string
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     address: string
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     photo: string;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     phone: string
 
     @Column({unique: true})
