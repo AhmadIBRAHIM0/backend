@@ -1,6 +1,7 @@
 import {Body, Controller, Post} from '@nestjs/common';
 import {AuthService} from './auth.service';
 import {CreatePatientDto} from "../patients/dto/create-patient.dto";
+import {IAuthResponse} from "./auth-response.interface";
 
 @Controller()
 export class AuthController {
@@ -18,7 +19,7 @@ export class AuthController {
     async login(
         @Body('email') email: string,
         @Body('password') password: string
-    ): Promise<{ accessToken }> {
+    ): Promise<IAuthResponse> {
 
         return this.authService.login(email, password);
 

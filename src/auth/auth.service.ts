@@ -6,6 +6,8 @@ import {UserRepository} from "../users/user.repository";
 import * as bcrypt from 'bcrypt';
 import {JwtService} from "@nestjs/jwt";
 import {JwtPayload} from "./jwt-payload.interface";
+import {IAuthResponse} from "./auth-response.interface";
+
 
 @Injectable()
 export class AuthService {
@@ -23,7 +25,7 @@ export class AuthService {
         await this.patientsService.create(createPatientDto);
     }
 
-    async login(email: string, password: string): Promise<{ accessToken: string }> {
+    async login(email: string, password: string): Promise<IAuthResponse> {
 
         const user = await this.userRepository.findOne({
             where: {
@@ -38,7 +40,11 @@ export class AuthService {
         const payload: JwtPayload = {email};
         const accessToken = this.jwtService.sign(payload);
 
-        return {accessToken};
+        return {
+            'accessToken': accessToken,
+            "email": user.email,
+            'role': user.role
+        };
     }
 
 }
