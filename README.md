@@ -41,6 +41,16 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
+## Connect to the database
+
+![Alt text](/external/1.png?raw=true "First")
+
+![Alt text](/external/2.png?raw=true "second")
+
+![Alt text](/external/3.png?raw=true "third")
+
+![Alt text](/external/4.png?raw=true "fourth")
+
 
 ## License
 
