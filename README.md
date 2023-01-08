@@ -36,6 +36,7 @@ Docker is installed on ur machine
 
 ## Installation
 
+#### - Rename .env.example to .env !!
 ```bash
 $ docker-compose build
 $ docker-compose up -d
