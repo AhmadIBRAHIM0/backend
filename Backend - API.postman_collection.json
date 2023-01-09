@@ -1,0 +1,1408 @@
+{
+	"info": {
+		"_postman_id": "3523db81-4c0f-4f1d-acd2-22eb6cf375de",
+		"name": "Backend - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14552005"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWFkQGdtYWlsLmNvbSIsImlhdCI6MTY3MjYxNjEwMSwiZXhwIjoxNjcyNjE2MTA0fQ.6kOQp3WfYw6cs9yR_zf7xIPctbk061NDCFpGqxYbnoo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "Ahmad",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "IBRAHIM",
+									"type": "text"
+								},
+								{
+									"key": "birthdate",
+									"value": "1999-08-30",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "lyon france",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "sakldhaisyhdhnkcniuhdf",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0764432074",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmad@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pu$$yL0v3r",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "f name updated",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "l name updated",
+									"type": "text"
+								},
+								{
+									"key": "birthdate",
+									"value": "2000-08-30",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMINNN",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "MALE",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Lyon Fr",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "asiuojnmcdmnf33",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "076443207444",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmad@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "ahmad123456",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/users/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "get all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/categories/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Categ2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Diabetes",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/categories/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/categories/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "specialities",
+			"item": [
+				{
+					"name": "get all specialities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/specialities",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"specialities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get speciality by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/specialities/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"specialities",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create speciality",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Speciality 3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/specialities",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"specialities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update speciality",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Speciality 3 updated",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/specialities/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"specialities",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete speciality",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/specialities/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"specialities",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "departments",
+			"item": [
+				{
+					"name": "get all departments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/departments",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get department by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/department/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"department",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create department",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Department 4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/departments",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update department",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Department 3 updated",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/departments/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete speciality",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/departments/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "services",
+			"item": [
+				{
+					"name": "get all services",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/services",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get service by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/services/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"services",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create service",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "service3",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "short description",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/services",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update service",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "service2 updated",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "nott short description",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/services/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"services",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "create patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "Ahmad",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "IBRAHIM",
+									"type": "text"
+								},
+								{
+									"key": "birthdate",
+									"value": "1999-08-30",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "lyon france",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "sakldhaisyhdhnkcniuhdf",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0764432074",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmad74@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pu$$yL0v3r",
+									"type": "text"
+								},
+								{
+									"key": "blood_group",
+									"value": "A+",
+									"type": "text"
+								},
+								{
+									"key": "allergies[]",
+									"value": "7asasie",
+									"type": "text"
+								},
+								{
+									"key": "allergies[]",
+									"value": "3al foul",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update patient",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "hhahaha",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "last_name",
+									"type": "text"
+								},
+								{
+									"key": "birthdate",
+									"value": "1999-05-10",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "sigma male",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "oullins 69600",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "dsr94ur9uifds0-dfig0-dsfisss",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0764437777777",
+									"type": "text"
+								},
+								{
+									"key": "blood_group",
+									"value": "AB+",
+									"type": "text"
+								},
+								{
+									"key": "allergies[]",
+									"value": "ar7a",
+									"type": "text"
+								},
+								{
+									"key": "allergies[]",
+									"value": "testtt",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/patients/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"patients",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all patients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get patient by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/patients/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"patients",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete patient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/patients/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"patients",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "doctors",
+			"item": [
+				{
+					"name": "create doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"first_name\":\"Ahmad\",\n\"last_name\":\"IBRAHIM\",\n\"birthdate\": \"1999-08-30\",\n\"gender\":\"male\",\n\"address\":\"lyon france\",\n\"photo\":\"sakldhaisyhdhnkcniuhdf\",\n\"phone\": \"0764432074\",\n\"email\":\"ahmad2@gmail.com\",\n\"password\":\"Pu$$yL0v3r\",\n\"specialityId\": 1,\n\"departmentId\": 1,\n\"schedules\": [\n    {\n        \"day\": \"monday\",\n        \"start\": \"09:00:00\",\n        \"end\": \"16:00:00\"\n    },\n    {\n        \"day\": \"tuesday\",\n        \"start\": \"12:00:00\",\n        \"end\": \"20:00:00\"\n    }\n]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/doctors",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update doctor",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"first_name\":\"Ahmad\",\n\"last_name\":\"IBRAHIM\",\n\"birthdate\": \"1999-08-30\",\n\"gender\":\"male\",\n\"address\":\"lyon france\",\n\"photo\":\"sakldhaisyhdhnkcniuhdf\",\n\"phone\": \"0764432074\",\n\"specialityId\": 2,\n\"departmentId\": 2,\n\"schedules\": [\n    {\n        \"day\": \"monday\",\n        \"start\": \"09:00:00\",\n        \"end\": \"16:00:00\"\n    },\n    {\n        \"day\": \"friday\",\n        \"start\": \"12:00:00\",\n        \"end\": \"20:00:00\"\n    }\n]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/doctors/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"doctors",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all doctors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/doctors",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete doctor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/doctors/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"doctors",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get appointments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/doctors/:id/appointments",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"doctors",
+								":id",
+								"appointments"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "create appointment",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"problem\": \"i have an urgent case\",\n    \"notes\": \"Please its very urgent\",\n    \"date\": \"2022-12-28\",\n    \"time\": \"13:00\",\n    \"patientId\":1,\n    \"doctorId\": 1,\n    \"serviceId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/appointments",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all appointments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/appointments",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get appointment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/appointments/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete appointment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/appointments/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"appointments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "Ahmad patient",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "IBRAHIM",
+									"type": "text"
+								},
+								{
+									"key": "birthdate",
+									"value": "1999-08-30",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "lyon france",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "sakldhaisyhdhnkcniuhdf",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0764432074",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmad9@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "D0g#L0v3r",
+									"type": "text"
+								},
+								{
+									"key": "blood_group",
+									"value": "A+",
+									"type": "text"
+								},
+								{
+									"key": "allergies[]",
+									"value": "7asasie",
+									"type": "text"
+								},
+								{
+									"key": "allergies[]",
+									"value": "3al foul",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ahmad2@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pu$$yL0v3r",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

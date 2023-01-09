@@ -27,6 +27,9 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 
+## Le Rapport est dans la racine de projet
+
+
 ## Requirement
 
 ```bash
@@ -51,6 +54,11 @@ $ docker-compose up -d
 ![Alt text](/external/3.png?raw=true "third")
 
 ![Alt text](/external/4.png?raw=true "fourth")
+
+
+## Postman testing
+
+#### - I have exported my postman collection, so u can import it, the file called "Backend - API.postman_collection.json" 
 
 
 ## License
