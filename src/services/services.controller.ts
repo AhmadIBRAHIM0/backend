@@ -5,7 +5,6 @@ import { UpdateServiceDto } from './dto/update-service.dto';
 import {AuthGuard} from "@nestjs/passport";
 
 @Controller('services')
-@UseGuards(AuthGuard())
 export class ServicesController {
   constructor(private readonly servicesService: ServicesService) {}
 

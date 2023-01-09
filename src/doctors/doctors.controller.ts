@@ -5,7 +5,6 @@ import { UpdateDoctorDto } from './dto/update-doctor.dto';
 import {AuthGuard} from "@nestjs/passport";
 
 @Controller('doctors')
-@UseGuards(AuthGuard())
 export class DoctorsController {
   constructor(private readonly doctorsService: DoctorsService) {}
 

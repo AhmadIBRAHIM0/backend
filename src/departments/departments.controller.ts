@@ -5,7 +5,6 @@ import { UpdateDepartmentDto } from './dto/update-department.dto';
 import {AuthGuard} from "@nestjs/passport";
 
 @Controller('departments')
-@UseGuards(AuthGuard())
 export class DepartmentsController {
   constructor(private readonly departmentsService: DepartmentsService) {}
 

@@ -6,7 +6,6 @@ import {GetUser} from "../auth/get-user.decorator";
 import {User} from "../users/entities/user.entity";
 
 @Controller('appointments')
-@UseGuards(AuthGuard())
 export class AppointmentsController {
   constructor(private readonly appointmentsService: AppointmentsService) {}
 
